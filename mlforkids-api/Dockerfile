@@ -1,10 +1,12 @@
-# ###############################################
-# build the app
-# ###############################################
-
 FROM node:20 AS builder
 
-# don't run as root
+# Update package lists and install git and ca-certificates
+RUN apt-get update && apt-get install -y git ca-certificates
+
+# Increase git buffer size
+RUN git config --global http.postBuffer 1048576000
+
+# don’t run as root
 USER node
 
 # run the app in a folder owned by the node user
@@ -25,7 +27,7 @@ RUN ls -l /usr/src/build
 
 # customize build for use with machinelearningforkids.co.uk
 # TODO - how can this be provided to buildruns dynamically?
-ENV DEPLOYMENT=machinelearningforkids.co.uk
+ENV DEPLOYMENT=mlforkids.ddns.net
 
 # run the build
 RUN ./node_modules/.bin/gulp buildprod
@@ -33,14 +35,10 @@ RUN ./node_modules/.bin/gulp buildprod
 # confirm the built app details
 RUN ls -l /usr/src/build
 
-
-# ###############################################
 # prepare app image
-# ###############################################
-
 FROM node:20
 
-# don't run as root
+# don’t run as root
 USER node
 
 # run the app in a folder owned by the node user

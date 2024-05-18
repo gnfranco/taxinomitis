@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node dist/lib/app.js",
-    "build": "./node_modules/.bin/gulp build",
-    "build_notest": "./node_modules/.bin/gulp compile web",
-    "test": "./node_modules/.bin/gulp test",
-    "lint": "./node_modules/.bin/eslint .",
-    "coverage": "gulp compile test",
+    "build": "cross-env ./node_modules/.bin/gulp build",
+    "build_prod": "cross-env ./node_modules/.bin/gulp buildprod",
+    "build_notest": "cross-env ./node_modules/.bin/gulp compile web",
+    "test": "cross-env ./node_modules/.bin/gulp test",
+    "lint": "cross-env ./node_modules/.bin/eslint .",
+    "coverage": "cross-env gulp compile test",
     "codeenginejob": "node dist/lib/batch.js"
   },
   "engines": {
@@ -18,13 +19,8 @@
   "author": "Dale Lane",
   "devDependencies": {
     "@mediapipe/face_mesh": "0.4.1633559619",
-    "tensorflow-models-face-landmarks-detection": "1.0.3-4.16.1",
-    "tensorflow-models-handpose": "0.0.7-4.16.0",
-    "tensorflow-models-posenet": "2.2.2-4.16.0",
-    "tensorflow-models-speech-commands": "0.5.4-4.16.0",
     "@tensorflow/tfjs": "4.17.0",
     "@tensorflow/tfjs-tfdf": "0.0.1-alpha.20",
-
     "@types/async": "2.4.2",
     "@types/body-parser": "1.19.5",
     "@types/bunyan": "1.8.11",
@@ -61,8 +57,9 @@
     "@typescript-eslint/parser": "6.20.0",
     "autoprefixer": "10.4.19",
     "clone": "2.1.2",
+    "cross-env": "^7.0.3",
     "del": "6.1.1",
-    "eslint": "8.57.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-node": "11.1.0",
     "filecompare": "1.0.4",
     "gulp": "4.0.2",
@@ -88,6 +85,10 @@
     "sinon": "15.2.0",
     "sinon-express-mock": "2.2.1",
     "supertest": "6.3.4",
+    "tensorflow-models-face-landmarks-detection": "1.0.3-4.16.1",
+    "tensorflow-models-handpose": "0.0.7-4.16.0",
+    "tensorflow-models-posenet": "2.2.2-4.16.0",
+    "tensorflow-models-speech-commands": "0.5.4-4.16.0",
     "typescript": "5.4.5",
     "typescript-require": "0.3.0",
     "unzipper": "0.11.6"
